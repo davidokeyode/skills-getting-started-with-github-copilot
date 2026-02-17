@@ -25,54 +25,63 @@ activities = {
         "name": "Swimming",
         "description": "Join our swimming club and improve your technique",
         "schedule": "Monday and Wednesday, 6-7 PM",
+        "max_participants": 20,
         "participants": []
     },
     "chess": {
         "name": "Chess Club",
         "description": "Learn and play chess with other students",
         "schedule": "Tuesday and Thursday, 4-5 PM",
+        "max_participants": 15,
         "participants": []
     },
     "painting": {
         "name": "Painting",
         "description": "Express yourself through painting",
         "schedule": "Friday, 3-5 PM",
+        "max_participants": 12,
         "participants": []
     },
     "basketball": {
         "name": "Basketball",
         "description": "Play basketball and improve your skills on the court",
         "schedule": "Tuesday and Thursday, 5-7 PM",
+        "max_participants": 15,
         "participants": []
     },
     "soccer": {
         "name": "Soccer",
         "description": "Join our soccer team for practice and matches",
         "schedule": "Monday and Friday, 4-6 PM",
+        "max_participants": 25,
         "participants": []
     },
     "theater": {
         "name": "Theater",
         "description": "Participate in drama and theater performances",
         "schedule": "Wednesday, 6-8 PM",
+        "max_participants": 20,
         "participants": []
     },
     "photography": {
         "name": "Photography",
         "description": "Learn photography techniques and capture stunning images",
         "schedule": "Saturday, 10 AM-12 PM",
+        "max_participants": 10,
         "participants": []
     },
     "debate": {
         "name": "Debate Club",
         "description": "Develop critical thinking and public speaking skills",
         "schedule": "Thursday, 5-6:30 PM",
+        "max_participants": 12,
         "participants": []
     },
     "robotics": {
         "name": "Robotics",
         "description": "Build and program robots in our engineering lab",
         "schedule": "Friday, 4-6 PM",
+        "max_participants": 15,
         "participants": []
     }
 }
@@ -102,6 +111,29 @@ def signup_for_activity(activity_name: str, email: str):
     if email in activity["participants"]:
         raise HTTPException(status_code=400, detail="Student is already signed up")
 
+    # Check if activity is full
+    if len(activity["participants"]) >= activity["max_participants"]:
+        raise HTTPException(status_code=400, detail="Activity is full")
+
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
+
+
+@app.delete("/activities/{activity_name}/participants/{email}")
+def remove_participant(activity_name: str, email: str):
+    """Remove a participant from an activity"""
+    # Validate activity exists
+    if activity_name not in activities:
+        raise HTTPException(status_code=404, detail="Activity not found")
+
+    # Get the specific activity
+    activity = activities[activity_name]
+
+    # Validate participant is signed up
+    if email not in activity["participants"]:
+        raise HTTPException(status_code=404, detail="Participant not found in this activity")
+
+    # Remove participant
+    activity["participants"].remove(email)
+    return {"message": f"Removed {email} from {activity_name}"}
