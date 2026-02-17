@@ -20,25 +20,60 @@ app.mount("/static", StaticFiles(directory=os.path.join(Path(__file__).parent,
           "static")), name="static")
 
 # In-memory activity database
-# Initialize activities with various categories
 activities = {
-    "Chess Club": {
-        "description": "Learn strategies and compete in chess tournaments",
-        "schedule": "Fridays, 3:30 PM - 5:00 PM",
-        "max_participants": 12,
-        "participants": ["michael@mergington.edu", "daniel@mergington.edu"]
+    "swimming": {
+        "name": "Swimming",
+        "description": "Join our swimming club and improve your technique",
+        "schedule": "Monday and Wednesday, 6-7 PM",
+        "participants": []
     },
-    "Programming Class": {
-        "description": "Learn programming fundamentals and build software projects",
-        "schedule": "Tuesdays and Thursdays, 3:30 PM - 4:30 PM",
-        "max_participants": 20,
-        "participants": ["emma@mergington.edu", "sophia@mergington.edu"]
+    "chess": {
+        "name": "Chess Club",
+        "description": "Learn and play chess with other students",
+        "schedule": "Tuesday and Thursday, 4-5 PM",
+        "participants": []
     },
-    "Gym Class": {
-        "description": "Physical education and sports activities",
-        "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
-        "max_participants": 30,
-        "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+    "painting": {
+        "name": "Painting",
+        "description": "Express yourself through painting",
+        "schedule": "Friday, 3-5 PM",
+        "participants": []
+    },
+    "basketball": {
+        "name": "Basketball",
+        "description": "Play basketball and improve your skills on the court",
+        "schedule": "Tuesday and Thursday, 5-7 PM",
+        "participants": []
+    },
+    "soccer": {
+        "name": "Soccer",
+        "description": "Join our soccer team for practice and matches",
+        "schedule": "Monday and Friday, 4-6 PM",
+        "participants": []
+    },
+    "theater": {
+        "name": "Theater",
+        "description": "Participate in drama and theater performances",
+        "schedule": "Wednesday, 6-8 PM",
+        "participants": []
+    },
+    "photography": {
+        "name": "Photography",
+        "description": "Learn photography techniques and capture stunning images",
+        "schedule": "Saturday, 10 AM-12 PM",
+        "participants": []
+    },
+    "debate": {
+        "name": "Debate Club",
+        "description": "Develop critical thinking and public speaking skills",
+        "schedule": "Thursday, 5-6:30 PM",
+        "participants": []
+    },
+    "robotics": {
+        "name": "Robotics",
+        "description": "Build and program robots in our engineering lab",
+        "schedule": "Friday, 4-6 PM",
+        "participants": []
     }
 }
 
